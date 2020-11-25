@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    // User is Signed In
+    
+}
+else
+{
+    // Not Signed In
+    <div class="alert alert-info" role="alert">
+        <strong>Heads Up!</strong>
+        If this is not the page you were expecting, please make sure to sign in.
+    </div>
+    
+}

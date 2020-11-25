@@ -1,0 +1,45 @@
+@using Microsoft.AspNetCore.Mvc.Rendering
+@using System.Net.NetworkInformation
+@model IEnumerable<CameraServer.Models.School>;
+
+@{
+    ViewBag.Title = "Schools Index";
+    Layout = "_Layout";
+}
+
+<h2>Schools Index</h2>
+
+<div class="schoolList" style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
+    @if (!Model.Any())
+    {
+        <p>Oops! There are not any schools configured.</p>
+    }
+    else {
+    @foreach (var school in Model)
+    {
+        <div class="card" style="width: 18rem; margin: 2rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => school.Name)</h5>
+            @if ((await AuthorizationService.AuthorizeAsync(User, "Technician")).Succeeded)
+        {
+            @Html.ActionLink("Edit", "Edit", new {id=school.SchoolId},new {@class="btn btn-primary"})
+        }
+            
+        </div>
+        </div>
+    }
+    }
+</div>
+@* <table> *@
+@*     <tr> *@
+@*         <th>@Html.DisplayNameFor(model => model.Name)</th> *@
+@*         <th>Actions</th> *@
+@*     </tr> *@
+@*     @foreach (var school in Model) *@
+@*     { *@
+@*         <tr> *@
+@*             <td>@Html.DisplayFor(modelItem => school.Name)</td> *@
+@*             <td>@Html.ActionLink("Edit", "Edit", new { id=school.SchoolId})</td> *@
+@*         </tr> *@
+@*     } *@
+@* </table> *@
